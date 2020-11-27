@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CustomValidators } from '../../validators/custom.validators';
 
 @Component({
   selector: 'app-register',
@@ -18,19 +19,21 @@ export class RegisterComponent implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        CustomValidators.passwordContainsNumber,
       ]),
       confirmPassword: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
       ]),
     },
-    {}
+    { validators: CustomValidators.passwordMatch }
   );
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  submitRegister(): void {
+  submitRegister(f: any): void {
+    console.log(f);
     if (this.registerForm.invalid) {
       return;
     }
