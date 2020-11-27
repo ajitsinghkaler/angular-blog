@@ -1,1 +1,38 @@
-<p>register works!</p>
+<h1>Register page</h1>
+<form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+  <div class="container">
+
+    <mat-form-field>
+      <input matInput placeholder="Full Name" formControlName="name">
+      <mat-hint *ngIf="registerForm.get('name')?.errors?.required">Name is required</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Your Username" formControlName="username">
+      <mat-hint *ngIf="registerForm.get('username')?.errors?.required">Username is required</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-hint *ngIf="registerForm.controls.email.errors?.required">Email is required</mat-hint>
+      <mat-hint *ngIf="registerForm.controls.email.errors?.email">Email is invalid</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" formControlName="password">
+      <mat-hint *ngIf="registerForm.controls.password.errors?.required">Password is required</mat-hint>
+      <mat-hint *ngIf="registerForm.controls.password.errors?.minlength">
+        Password should be atleat 3 characters long
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword">
+      <mat-hint *ngIf="registerForm.controls.confirmPassword.errors?.required">Password confirmation is required</mat-hint>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" [disabled]="registerForm.invalid">Login</button>
+
+  </div>
+
+</form>
