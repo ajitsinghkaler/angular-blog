@@ -2,19 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
-
-export interface LoginForm {
-  email: string;
-  password: string;
-}
-
-export interface User {
-  name?: string;
-  username?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-}
+import { User } from 'src/app/shared/models/user-data.interface';
+import { LoginForm } from 'src/app/shared/models/util.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -36,8 +25,6 @@ export class AuthService {
   }
 
   register(user: User): Observable<string> {
-    return this.http
-      .post('users', user)
-      .pipe(mapTo('Registered successfully'));
+    return this.http.post('users', user).pipe(mapTo('Registered successfully'));
   }
 }

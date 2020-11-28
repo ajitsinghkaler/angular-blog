@@ -10,12 +10,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { AuthInterceptor } from './services/interceptors/auth.interceptor';
+import { UsersComponent } from './shared/components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,7 @@ import { AuthInterceptor } from './services/interceptors/auth.interceptor';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,9 @@ import { AuthInterceptor } from './services/interceptors/auth.interceptor';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

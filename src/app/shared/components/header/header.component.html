@@ -2,8 +2,14 @@
   <mat-toolbar-row>
     <span>Third Line</span>
     <span class="example-spacer"></span>
-    <a>Login</a>
-    <a>Register</a>
-    <a>Admin</a>
+    <button mat-flat-button routerLink="/users">Users</button>
+    <button mat-flat-button class="l-20" routerLink="/admin">Admin</button>
+    <mat-form-field class="l-20">
+      <mat-select placeholder="Login" (selectionChange)="navigateTo($event.value)">
+        <mat-option *ngFor="let entry of entries" [value]="entry.link">
+          {{entry.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-toolbar-row>
 </mat-toolbar>

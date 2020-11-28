@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  entries = [
+    {
+      name: 'Login',
+      link: 'login',
+    },
+    {
+      name: 'Register',
+      link: 'register',
+    },
+  ];
+  constructor(private router: Router) {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  navigateTo(value: string): void {
+    this.router.navigate(['../', value]);
   }
-
 }
