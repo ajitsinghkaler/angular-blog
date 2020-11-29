@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UserData } from '../../models/user-data.interface';
@@ -14,7 +15,7 @@ export class UsersComponent implements OnInit {
 
   dataSource: UserData | null = null;
   displayedColumns = ['id', 'name', 'username', 'email', 'role'];
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.initDataSouce();
@@ -49,5 +50,9 @@ export class UsersComponent implements OnInit {
       .findByUsername(1, 10, username)
       .pipe(tap((userData) => (this.dataSource = userData)))
       .subscribe(console.log);
+  }
+
+  navigateToProfile(id: number): void {
+    this.router.navigate(['users', id]);
   }
 }

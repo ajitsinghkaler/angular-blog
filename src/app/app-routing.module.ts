@@ -5,6 +5,7 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { UpdateUserProfileComponent } from './shared/components/update-user-profile/update-user-profile.component';
 import { UsersComponent } from './shared/components/users/users.component';
+import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,16 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UsersComponent,
+    children: [
+      {
+        path: '',
+        component: UsersComponent,
+      },
+      {
+        path: ':id',
+        component: UserProfileComponent,
+      },
+    ],
   },
   {
     path: 'update-profile',

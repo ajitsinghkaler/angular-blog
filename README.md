@@ -4,3 +4,8 @@ This library relies on the URL interface which is not supported in IE11. To solv
 
 run `npm i --save url-polyfill`
 add `import 'url-polyfill';` to `polyfills.ts` in your project
+
+## Learning
+
+Proxy Setup
+Chck token expiration

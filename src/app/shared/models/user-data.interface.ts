@@ -13,4 +13,5 @@ export interface User {
   password?: string;
   // confirmPassword?: string;
   role?: string;
+  profileImage?: string;
 }

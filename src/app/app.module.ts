@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { RegisterComponent } from './shared/components/register/register.compone
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UsersComponent } from './shared/components/users/users.component';
 import { UpdateUserProfileComponent } from './shared/components/update-user-profile/update-user-profile.component';
+import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { UpdateUserProfileComponent } from './shared/components/update-user-prof
     RegisterComponent,
     UsersComponent,
     UpdateUserProfileComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { UpdateUserProfileComponent } from './shared/components/update-user-prof
     MatTableModule,
     MatPaginatorModule,
     FormsModule,
+    MatCardModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
