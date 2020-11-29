@@ -10,6 +10,8 @@ import { UserData } from '../../models/user-data.interface';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  filterValue: string | null = null;
+
   dataSource: UserData | null = null;
   displayedColumns = ['id', 'name', 'username', 'email', 'role'];
   constructor(private userService: UsersService) {}
@@ -29,8 +31,22 @@ export class UsersComponent implements OnInit {
     let page = event.pageIndex;
     const limit = event.pageSize;
     page = page + 1;
+    if (!this.filterValue) {
+      this.userService
+        .findAll(page, limit)
+        .pipe(tap((userData) => (this.dataSource = userData)))
+        .subscribe(console.log);
+    } else {
+      this.userService
+        .findByUsername(page, limit, this.filterValue)
+        .pipe(tap((userData) => (this.dataSource = userData)))
+        .subscribe(console.log);
+    }
+  }
+
+  findByName(username: string): void {
     this.userService
-      .findAll(page, limit)
+      .findByUsername(1, 10, username)
       .pipe(tap((userData) => (this.dataSource = userData)))
       .subscribe(console.log);
   }

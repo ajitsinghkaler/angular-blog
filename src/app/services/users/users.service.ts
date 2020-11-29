@@ -19,4 +19,16 @@ export class UsersService {
       .get<UserData>('users', { params })
       .pipe(catchError((err) => throwError(err)));
   }
+
+  findByUsername(page: number, limit: number, username: string): Observable<UserData> {
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('limit', String(limit));
+    params = params.append('username', username);
+
+    console.log(params.toString());
+    return this.http
+      .get<UserData>('users', { params })
+      .pipe(catchError((err) => throwError(err)));
+  }
 }
