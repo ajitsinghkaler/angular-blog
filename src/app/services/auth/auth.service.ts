@@ -4,11 +4,14 @@ import { Observable } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user-data.interface';
 import { LoginForm } from 'src/app/shared/models/util.interface';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+export const JWT_NAME = 'token';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwthelper: JwtHelperService) {}
 
   login(loginForm: LoginForm): Observable<string> {
     return this.http
@@ -18,7 +21,7 @@ export class AuthService {
       })
       .pipe(
         tap((token) => {
-          localStorage.setItem('token', token.access_token);
+          localStorage.setItem(JWT_NAME, token.access_token);
         }),
         mapTo('Logged in successfully')
       );
@@ -26,5 +29,10 @@ export class AuthService {
 
   register(user: User): Observable<string> {
     return this.http.post('users', user).pipe(mapTo('Registered successfully'));
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(JWT_NAME) || undefined;
+    return !this.jwthelper.isTokenExpired(token);
   }
 }

@@ -10,7 +10,7 @@ import { UserData } from '../../models/user-data.interface';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  filterValue: string | null = null;
+  filterValue = '';
 
   dataSource: UserData | null = null;
   displayedColumns = ['id', 'name', 'username', 'email', 'role'];

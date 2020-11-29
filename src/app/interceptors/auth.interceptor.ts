@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { JWT_NAME } from '../services/auth/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,23 +21,20 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     request = request.clone({ url: `${environment.BASE_URL}${request.url}` });
-    const token = localStorage.getItem('token');
-
+    const token = localStorage.getItem(JWT_NAME);
     if (token) {
-      const clonedReq = request.clone({
+      request = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token),
       });
-      return next.handle(clonedReq).pipe(
-        tap({
-          error: (error: HttpErrorResponse) => {
-            if (error.status === 401) {
-              this.router.navigate(['login']);
-            }
-          },
-        })
-      );
-    } else {
-      return next.handle(request);
     }
+    return next.handle(request).pipe(
+      tap({
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.router.navigate(['login']);
+          }
+        },
+      })
+    );
   }
 }

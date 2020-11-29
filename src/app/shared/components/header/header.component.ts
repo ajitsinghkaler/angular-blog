@@ -16,6 +16,10 @@ export class HeaderComponent implements OnInit {
       name: 'Register',
       link: 'register',
     },
+    {
+      name: 'Update Profile',
+      link: 'update-profile',
+    },
   ];
   constructor(private router: Router) {}
 
