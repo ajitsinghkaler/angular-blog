@@ -44,4 +44,11 @@ export class UsersService {
   updateUser(user: User): Observable<User> {
     return this.http.put(this.BASE_USER_URL + `/${user.id}`, user);
   }
+
+  uploadProfileImage(formData: FormData): Observable<any> {
+    return this.http.post(this.BASE_USER_URL + '/upload', formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
 }

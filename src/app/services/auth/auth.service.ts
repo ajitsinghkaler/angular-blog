@@ -22,7 +22,6 @@ export class AuthService {
       .pipe(
         tap((token) => {
           localStorage.setItem(JWT_NAME, token.access_token);
-          console.log(token.access_token)
         }),
         mapTo('Logged in successfully')
       );

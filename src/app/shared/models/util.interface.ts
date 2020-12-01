@@ -17,3 +17,9 @@ export interface LoginForm {
   email: string;
   password: string;
 }
+
+export interface File {
+  data: any;
+  inProgress: boolean;
+  progress: number;
+}
