@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   submitRegister(f: any): void {
-    console.log(f);
     if (this.registerForm.invalid) {
       return;
     }

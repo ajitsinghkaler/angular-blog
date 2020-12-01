@@ -42,8 +42,6 @@ export class UpdateUserProfileComponent implements OnInit {
         switchMap((id: number = -1) =>
           this.userService.findUser(id).pipe(
             tap((user: User) => {
-              console.log(user);
-
               this.form.patchValue({
                 id: user.id,
                 name: user.name,
@@ -99,7 +97,6 @@ export class UpdateUserProfileComponent implements OnInit {
       .subscribe((event) => {
         if (typeof event === 'object') {
           this.form.get('profileImage')?.setValue(event.body.profileImage);
-          console.log(this.form.value);
         }
       });
   }

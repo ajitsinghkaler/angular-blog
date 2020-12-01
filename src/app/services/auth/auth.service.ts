@@ -40,7 +40,6 @@ export class AuthService {
     return of(localStorage.getItem(JWT_NAME) || '').pipe(
       switchMap((jwt: string) =>
         of(this.jwthelper.decodeToken(jwt)).pipe(
-          tap(console.log),
           map((user: { user: User }) => user.user.id)
         )
       )
