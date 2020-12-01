@@ -8,11 +8,11 @@ import { User, UserData } from 'src/app/shared/models/user-data.interface';
   providedIn: 'root',
 })
 export class UsersService {
-  BASE_USER_URL = 'users/';
+  BASE_USER_URL = 'users';
   constructor(private http: HttpClient) {}
 
   findUser(id: number): Observable<User> {
-    return this.http.get(this.BASE_USER_URL + id).pipe(tap(console.log));
+    return this.http.get(this.BASE_USER_URL + '/' + id).pipe(tap(console.log));
   }
 
   findAll(page: number, limit: number): Observable<UserData> {
@@ -39,5 +39,9 @@ export class UsersService {
     return this.http
       .get<UserData>(this.BASE_USER_URL, { params })
       .pipe(catchError((err) => throwError(err)));
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put(this.BASE_USER_URL + `/${user.id}`, user);
   }
 }

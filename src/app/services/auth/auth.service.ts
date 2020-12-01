@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { mapTo, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user-data.interface';
 import { LoginForm } from 'src/app/shared/models/util.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -22,6 +22,7 @@ export class AuthService {
       .pipe(
         tap((token) => {
           localStorage.setItem(JWT_NAME, token.access_token);
+          console.log(token.access_token)
         }),
         mapTo('Logged in successfully')
       );
@@ -34,5 +35,16 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = localStorage.getItem(JWT_NAME) || undefined;
     return !this.jwthelper.isTokenExpired(token);
+  }
+
+  getUserId(): Observable<number | undefined> {
+    return of(localStorage.getItem(JWT_NAME) || '').pipe(
+      switchMap((jwt: string) =>
+        of(this.jwthelper.decodeToken(jwt)).pipe(
+          tap(console.log),
+          map((user: { user: User }) => user.user.id)
+        )
+      )
+    );
   }
 }

@@ -8,4 +8,5 @@ add `import 'url-polyfill';` to `polyfills.ts` in your project
 ## Learning
 
 Proxy Setup
-Chck token expiration
+Check token expiration
+PatchValue
