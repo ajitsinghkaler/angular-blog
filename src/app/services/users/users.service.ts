@@ -12,14 +12,13 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   findUser(id: number): Observable<User> {
-    return this.http.get(this.BASE_USER_URL + '/' + id).pipe(tap(console.log));
+    return this.http.get(this.BASE_USER_URL + '/' + id);
   }
 
   findAll(page: number, limit: number): Observable<UserData> {
     let params = new HttpParams();
     params = params.append('page', String(page));
     params = params.append('limit', String(limit));
-    console.log(params.toString());
     return this.http
       .get<UserData>(this.BASE_USER_URL, { params })
       .pipe(catchError((err) => throwError(err)));
@@ -34,8 +33,6 @@ export class UsersService {
     params = params.append('page', String(page));
     params = params.append('limit', String(limit));
     params = params.append('username', username);
-
-    console.log(params.toString());
     return this.http
       .get<UserData>(this.BASE_USER_URL, { params })
       .pipe(catchError((err) => throwError(err)));
@@ -43,5 +40,12 @@ export class UsersService {
 
   updateUser(user: User): Observable<User> {
     return this.http.put(this.BASE_USER_URL + `/${user.id}`, user);
+  }
+
+  uploadProfileImage(formData: FormData): Observable<any> {
+    return this.http.post(this.BASE_USER_URL + '/upload', formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 }

@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
     this.userService
       .findAll(1, 10)
       .pipe(tap((userData) => (this.dataSource = userData)))
-      .subscribe(console.log);
+      .subscribe();
   }
 
   onPaginateChange(event: PageEvent): void {
@@ -36,12 +36,12 @@ export class UsersComponent implements OnInit {
       this.userService
         .findAll(page, limit)
         .pipe(tap((userData) => (this.dataSource = userData)))
-        .subscribe(console.log);
+        .subscribe();
     } else {
       this.userService
         .findByUsername(page, limit, this.filterValue)
         .pipe(tap((userData) => (this.dataSource = userData)))
-        .subscribe(console.log);
+        .subscribe();
     }
   }
 
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
     this.userService
       .findByUsername(1, 10, username)
       .pipe(tap((userData) => (this.dataSource = userData)))
-      .subscribe(console.log);
+      .subscribe();
   }
 
   navigateToProfile(id: number): void {
