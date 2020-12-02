@@ -26,6 +26,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UsersComponent } from './shared/components/users/users.component';
 import { UpdateUserProfileComponent } from './shared/components/update-user-profile/update-user-profile.component';
 import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
+import { HomeComponent } from './shared/components/home/home.component';
+import { BlogEntriesComponent } from './shared/components/blog-entries/blog-entries.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { UserProfileComponent } from './shared/components/user-profile/user-prof
     UsersComponent,
     UpdateUserProfileComponent,
     UserProfileComponent,
+    HomeComponent,
+    BlogEntriesComponent,
   ],
   imports: [
     BrowserModule,

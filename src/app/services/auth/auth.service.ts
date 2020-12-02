@@ -39,8 +39,8 @@ export class AuthService {
   getUserId(): Observable<number | undefined> {
     return of(localStorage.getItem(JWT_NAME) || '').pipe(
       switchMap((jwt: string) =>
-        of(this.jwthelper.decodeToken(jwt)).pipe(
-          map((user: { user: User }) => user.user.id)
+        of(this.jwthelper.decodeToken<{ user: User }>(jwt)).pipe(
+          map((user) => user.user.id)
         )
       )
     );

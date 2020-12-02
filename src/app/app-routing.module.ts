@@ -6,6 +6,7 @@ import { RegisterComponent } from './shared/components/register/register.compone
 import { UpdateUserProfileComponent } from './shared/components/update-user-profile/update-user-profile.component';
 import { UsersComponent } from './shared/components/users/users.component';
 import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
+import { HomeComponent } from './shared/components/home/home.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,15 @@ const routes: Routes = [
     path: 'update-profile',
     component: UpdateUserProfileComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
   },
 ];
 
