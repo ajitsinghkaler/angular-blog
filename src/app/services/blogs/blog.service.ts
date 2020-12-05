@@ -36,4 +36,8 @@ export class BlogService {
       observe: 'events',
     });
   }
+
+  findEntry(id: number): Observable<BlogEntry> {
+    return this.http.get<BlogEntry>(this.BASE_USER_URL + `/${id}`);
+  }
 }

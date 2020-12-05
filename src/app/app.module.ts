@@ -17,19 +17,20 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { UsersComponent } from './shared/components/users/users.component';
-import { UpdateUserProfileComponent } from './shared/components/update-user-profile/update-user-profile.component';
-import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 import { HomeComponent } from './shared/components/home/home.component';
-import { BlogEntriesComponent } from './shared/components/blog-entries/blog-entries.component';
-import { CreateBlogEntryComponent } from './shared/components/create-blog-entry/create-blog-entry.component';
-import { MarkdownModule } from 'ngx-markdown';
+import { BlogEntriesComponent } from './shared/components/blog-entry/blog-entries/blog-entries.component';
+import { CreateBlogEntryComponent } from './shared/components/blog-entry/create-blog-entry/create-blog-entry.component';
+import { UsersComponent } from './shared/components/user/users/users.component';
+import { UpdateUserProfileComponent } from './shared/components/user/update-user-profile/update-user-profile.component';
+import { UserProfileComponent } from './shared/components/user/user-profile/user-profile.component';
+import { ViewBlogEntryComponent } from './shared/components/blog-entry/view-blog-entry/view-blog-entry.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MarkdownModule } from 'ngx-markdown';
     HomeComponent,
     BlogEntriesComponent,
     CreateBlogEntryComponent,
+    ViewBlogEntryComponent,
   ],
   imports: [
     MarkdownModule.forRoot(),

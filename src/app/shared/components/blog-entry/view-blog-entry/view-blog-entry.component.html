@@ -1,0 +1,20 @@
+<div class="main" *ngIf="blogEntry$|async as blog">
+  <mat-card class="card">
+    <mat-card-header style="display: flex;">
+      <div>
+
+        <img class="" [src]="URL + 'blogs/image/' + $any(blog.headerImage)" *ngIf="blog.headerImage">
+        <img *ngIf="!blog.headerImage" src="assets/placeholder.jpg">
+      </div>
+      <div style="margin-left: 20px;">
+        <h1>{{blog.title}}</h1>
+        <h2>{{blog.description}}</h2>
+        <h3>{{blog.author.name}}</h3>
+        <a routerLink="/users/{{blog.author.id}}">Go to user profile</a>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <markdown [data]="blog.body"></markdown>
+    </mat-card-content>
+  </mat-card>
+</div>

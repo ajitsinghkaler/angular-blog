@@ -1,5 +1,6 @@
 <div class="container">
-  <mat-card *ngFor="let blogEntry of (dataSource|async)?.items">
+  <h1>Posts</h1>
+  <mat-card class="pointer" routerLink='/blog-entry/{{blogEntry.id}}' *ngFor="let blogEntry of (dataSource|async)?.items">
     <div style="display: flex;">
       <div>
         <img *ngIf="blogEntry.headerImage" [src]="URL + 'blogs/image/' + $any(blogEntry.headerImage)">

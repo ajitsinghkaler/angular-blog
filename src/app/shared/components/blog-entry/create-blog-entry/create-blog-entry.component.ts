@@ -1,20 +1,19 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { UsersService } from 'src/app/services/users/users.service';
+import { catchError, map, tap } from 'rxjs/operators';
+import { BlogService } from 'src/app/services/blogs/blog.service';
+import { File } from 'src/app/shared/models/util.interface';
 import { environment } from 'src/environments/environment';
-import { User } from '../../models/user-data.interface';
-import { File } from '../../models/util.interface';
 
 @Component({
-  selector: 'app-update-user-profile',
-  templateUrl: './update-user-profile.component.html',
-  styleUrls: ['./update-user-profile.component.scss'],
+  selector: 'app-create-blog-entry',
+  templateUrl: './create-blog-entry.component.html',
+  styleUrls: ['./create-blog-entry.component.scss'],
 })
-export class UpdateUserProfileComponent implements OnInit {
+export class CreateBlogEntryComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: ElementRef;
   URL = environment.url + environment.BASE_URL;
   file: File = {
@@ -24,39 +23,27 @@ export class UpdateUserProfileComponent implements OnInit {
   };
 
   form = this.formBuilder.group({
-    id: [{ value: null, disabled: true }, [Validators.required]],
-    name: [null, [Validators.required]],
-    username: [null, [Validators.required]],
-    profileImage: [null],
+    title: [null, [Validators.required]],
+    slug: [{ value: null, disabled: true }],
+    description: [null, [Validators.required]],
+    body: [null, [Validators.required]],
+    headerImage: [null, [Validators.required]],
   });
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private userService: UsersService
+    private blogService: BlogService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.authService
-      .getUserId()
-      .pipe(
-        switchMap((id: number = -1) =>
-          this.userService.findUser(id).pipe(
-            tap((user: User) => {
-              this.form.patchValue({
-                id: user.id,
-                name: user.name,
-                username: user.username,
-                profileImage: user.profileImage,
-              });
-            })
-          )
-        )
-      )
-      .subscribe();
-  }
+  ngOnInit(): void {}
 
-  update(): void {
-    this.userService.updateUser(this.form.getRawValue()).subscribe();
+  post(): void {
+    if (this.form.valid) {
+      this.blogService
+        .post(this.form.getRawValue())
+        .pipe(tap(() => this.router.navigate(['../'])))
+        .subscribe();
+    }
   }
 
   onClick(): void {
@@ -73,8 +60,8 @@ export class UpdateUserProfileComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.file.data);
     this.file.inProgress = true;
-    this.userService
-      .uploadProfileImage(formData)
+    this.blogService
+      .uploadHeaderImage(formData)
       .pipe(
         map(
           (event) => {
@@ -96,7 +83,7 @@ export class UpdateUserProfileComponent implements OnInit {
       )
       .subscribe((event) => {
         if (typeof event === 'object') {
-          this.form.get('profileImage')?.setValue(event.body.profileImage);
+          this.form.get('headerImage')?.setValue(event.body.filename);
         }
       });
   }

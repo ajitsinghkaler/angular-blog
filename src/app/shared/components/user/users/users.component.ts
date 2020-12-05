@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users/users.service';
-import { UserData } from '../../models/user-data.interface';
+import { UserData } from 'src/app/shared/models/user-data.interface';
 
 @Component({
   selector: 'app-users',

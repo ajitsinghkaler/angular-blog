@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users/users.service';
-import { User } from '../../models/user-data.interface';
+import { User } from 'src/app/shared/models/user-data.interface';
 import { environment } from 'src/environments/environment';
 
 @Component({
