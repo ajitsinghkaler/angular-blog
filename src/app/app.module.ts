@@ -28,6 +28,8 @@ import { UpdateUserProfileComponent } from './shared/components/update-user-prof
 import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { BlogEntriesComponent } from './shared/components/blog-entries/blog-entries.component';
+import { CreateBlogEntryComponent } from './shared/components/create-blog-entry/create-blog-entry.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -40,8 +42,10 @@ import { BlogEntriesComponent } from './shared/components/blog-entries/blog-entr
     UserProfileComponent,
     HomeComponent,
     BlogEntriesComponent,
+    CreateBlogEntryComponent,
   ],
   imports: [
+    MarkdownModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

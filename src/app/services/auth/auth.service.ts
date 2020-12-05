@@ -45,4 +45,8 @@ export class AuthService {
       )
     );
   }
+
+  logout(): void {
+    localStorage.removeItem(JWT_NAME);
+  }
 }

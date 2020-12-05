@@ -1,0 +1,50 @@
+<form [formGroup]="form" (ngSubmit)="post()">
+  <div>
+    <mat-card class="container">
+      <div style="width: 80%">
+        <mat-card>
+
+          <mat-card-content>
+            <div>
+              <img [src]="URL + 'blogs/image/' + $any(form.get('headerImage')?.value)"
+                *ngIf="form.get('headerImage')?.value">
+              <img *ngIf="!form.get('headerImage')?.value" src="assets/placeholder.jpg">
+              <ul>
+                <li>
+                  <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                </li>
+              </ul>
+              <mat-card-actions>
+                <button type="button" mat-button color="warn" (click)="onClick()">
+                  <mat-icon>cloud_upload</mat-icon>
+                  <small>Upload Image</small>
+                </button>
+              </mat-card-actions>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <input style="display:none" type="file" #fileUpload id="fileUpload" name="fileUpload" accept="img/*">
+      </div>
+      <div style="width: 80%;" class="container">
+        <!-- <mat-form-field>
+          <input matInput placeholder="ID" formControlName="id">
+        </mat-form-field> -->
+
+        <mat-form-field>
+          <input matInput placeholder="Title" formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Desciption" formControlName="description">
+        </mat-form-field>
+        <div style="width: 100%;display: flex;">
+          <mat-form-field style="width:45%">
+            <textarea rows="15"  matInput placeholder="Enter Markdown...." class="variable-textarea" formControlName="body"></textarea>
+          </mat-form-field>
+          <markdown style="border-style:dotted ; width:45%; margin-left:10%" [data]="form.get('body')?.value"></markdown>
+        </div>
+      </div>
+      <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Add Blog Entry</button>
+    </mat-card>
+  </div>
+</form>

@@ -7,6 +7,7 @@ import { UpdateUserProfileComponent } from './shared/components/update-user-prof
 import { UsersComponent } from './shared/components/users/users.component';
 import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 import { HomeComponent } from './shared/components/home/home.component';
+import { CreateBlogEntryComponent } from './shared/components/create-blog-entry/create-blog-entry.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,11 @@ const routes: Routes = [
   {
     path: 'update-profile',
     component: UpdateUserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'create-blog-entry',
+    component: CreateBlogEntryComponent,
     canActivate: [AuthGuard],
   },
   {
