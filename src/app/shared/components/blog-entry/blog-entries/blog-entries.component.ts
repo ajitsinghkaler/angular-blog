@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { BlogService } from 'src/app/services/blogs/blog.service';
+import { BlogEntriesData } from 'src/app/shared/models/blog-entries.interface';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,17 +9,13 @@ import { environment } from 'src/environments/environment';
   templateUrl: './blog-entries.component.html',
   styleUrls: ['./blog-entries.component.scss'],
 })
-export class BlogEntriesComponent implements OnInit {
+export class BlogEntriesComponent {
   URL = environment.url + environment.BASE_URL;
-  dataSource = this.blogService.indexAll(1, 10);
-  constructor(private blogService: BlogService) {}
-
-  ngOnInit(): void {}
+  @Input() blogEntries!: BlogEntriesData | null;
+  @Output() paginate = new EventEmitter<PageEvent>();
 
   onPaginateChange(event: PageEvent): void {
-    let page = event.pageIndex;
-    const limit = event.pageSize;
-    page = page + 1;
-    this.dataSource = this.blogService.indexAll(page, limit);
+    event.pageIndex = event.pageIndex + 1;
+    this.paginate.emit(event);
   }
 }

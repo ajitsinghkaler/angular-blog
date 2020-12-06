@@ -40,4 +40,18 @@ export class BlogService {
   findEntry(id: number): Observable<BlogEntry> {
     return this.http.get<BlogEntry>(this.BASE_USER_URL + `/${id}`);
   }
+
+  indexByUser(
+    userId: number,
+    page: number,
+    limit: number
+  ): Observable<BlogEntriesData> {
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('limit', String(limit));
+    return this.http.get<BlogEntriesData>(
+      this.BASE_USER_URL + `/user/${userId}`,
+      { params }
+    );
+  }
 }

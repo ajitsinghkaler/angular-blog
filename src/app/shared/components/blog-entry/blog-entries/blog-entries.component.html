@@ -1,6 +1,5 @@
 <div class="container">
-  <h1>Posts</h1>
-  <mat-card class="pointer" routerLink='/blog-entry/{{blogEntry.id}}' *ngFor="let blogEntry of (dataSource|async)?.items">
+  <mat-card class="pointer" routerLink='/blog-entry/{{blogEntry.id}}' *ngFor="let blogEntry of blogEntries?.items">
     <div style="display: flex;">
       <div>
         <img *ngIf="blogEntry.headerImage" [src]="URL + 'blogs/image/' + $any(blogEntry.headerImage)">
@@ -14,7 +13,7 @@
 
     </div>
   </mat-card>
-  <mat-paginator [length]="(dataSource|async)?.meta?.totalItems" [pageSize]="(dataSource|async)?.meta?.itemsPerPage"
+  <mat-paginator [length]="blogEntries?.meta?.totalItems" [pageSize]="blogEntries?.meta?.itemsPerPage"
     [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPaginateChange($event)" showFirstLastButtons>
   </mat-paginator>
 </div>
